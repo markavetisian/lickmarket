@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Lick Market</title>
+<style>
+  :root {
+    --bg: #fbfbfb;
+    --surface: #ffffff;
+    --ink: #0e0e10;
+    --muted: #55575c;
+    --line: #e6e6e8;
+    --line-strong: #d8d8dc;
+    --accent: #0098EA;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 56px 0 40px;
+  }
+
+  .wordmark {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .tagline {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .positioning {
+    margin: 24px 0 0;
+    padding: 16px 18px;
+    border: 1px solid var(--line-strong);
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 720px;
+  }
+
+  .header-cta {
+    margin-top: 28px;
+  }
+
+  /* Button */
+  .btn {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 12px 20px;
+    background: var(--accent);
+    color: #ffffff;
+    border: 1px solid var(--accent);
+  }
+
+  .btn:hover { background: #007fc4; border-color: #007fc4; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .btn-ghost:hover { background: transparent; color: #007fc4; }
+
+  /* Section labels */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 44px 0 18px;
+  }
+
+  /* Terms strip */
+  .terms {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 12px 16px;
+    margin: 40px 0 8px;
+  }
+
+  /* Cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .card {
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card.featured {
+    grid-column: 1 / -1;
+    border-top: 3px solid var(--accent);
+    padding: 32px;
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .card-title {
+    font-size: 19px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .card.featured .card-title { font-size: 24px; }
+
+  .price {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .price .scope {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .card-desc {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .card ul {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+  }
+
+  .card.featured ul {
+    columns: 2;
+    column-gap: 32px;
+  }
+
+  .card li {
+    font-size: 14px;
+    padding: 6px 0 6px 18px;
+    position: relative;
+    break-inside: avoid;
+  }
+
+  .card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 64px;
+    padding: 44px 0 64px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-head {
+    font-size: 20px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .footer-note {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  @media (max-width: 720px) {
+    header { padding: 40px 0 32px; }
+    .wordmark { font-size: 28px; }
+    .grid { grid-template-columns: 1fr; }
+    .card.featured { padding: 24px; }
+    .card.featured .card-title { font-size: 21px; }
+    .card.featured ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1 class="wordmark">Lick Market</h1>
+    <p class="tagline">Custom development, built to order.</p>
+    <p class="positioning">We take on work regardless of ethics. One hard line: no malware, no wallet drainers, no scams.</p>
+    <div class="header-cta">
+      <a class="btn" href="https://t.me/lickxrp">Inquire on Telegram</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="section-label">Services</p>
+
+  <div class="grid">
+
+    <article class="card featured">
+      <div class="card-head">
+        <h2 class="card-title">On-chain Intelligence Terminal</h2>
+        <div class="price">$5,000+<span class="scope">scope-dependent</span></div>
+      </div>
+      <p class="card-desc">A private intelligence terminal for monitoring and investigating on-chain activity.</p>
+      <ul>
+        <li>Wallet &amp; entity tracking</li>
+        <li>Transaction flow analysis</li>
+        <li>Token &amp; contract intelligence</li>
+        <li>Address labels &amp; watchlists</li>
+        <li>Real-time alerts</li>
+        <li>Historical activity</li>
+        <li>Custom dashboards</li>
+        <li>API &amp; data exports</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h2 class="card-title">Telegram Commerce Platform</h2>
+        <div class="price">$2,000+<span class="scope">scope-dependent</span></div>
+      </div>
+      <p class="card-desc">Build your business directly inside Telegram.</p>
+      <ul>
+        <li>Mini App storefront</li>
+        <li>Payments &amp; subscriptions</li>
+        <li>Automated delivery</li>
+        <li>Affiliate &amp; referral system</li>
+        <li>Customer management</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h2 class="card-title">Custom TON Payment Systems</h2>
+        <div class="price">$1,500+<span class="scope">scope-dependent</span></div>
+      </div>
+      <p class="card-desc">Custom crypto payment infrastructure for your business.</p>
+      <ul>
+        <li>TON &amp; USDT payments</li>
+        <li>Automatic payment verification</li>
+        <li>Transaction tracking &amp; delivery</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h2 class="card-title">Web Apps</h2>
+        <div class="price">$1,000+<span class="scope">scope-dependent</span></div>
+      </div>
+      <p class="card-desc">Build any web application.</p>
+      <ul>
+        <li>Dashboards &amp; user systems</li>
+        <li>Automation &amp; custom tools</li>
+        <li>Payments &amp; third-party services</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h2 class="card-title">Telegram Mini Apps</h2>
+        <div class="price">$1,000+<span class="scope">scope-dependent</span></div>
+      </div>
+      <p class="card-desc">Custom Mini Apps built directly inside Telegram.</p>
+      <ul>
+        <li>Stores &amp; marketplaces</li>
+        <li>Payments &amp; subscriptions</li>
+        <li>User accounts &amp; dashboards</li>
+        <li>Custom integrations</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h2 class="card-title">Custom Telegram Bots</h2>
+        <div class="price">$500+<span class="scope">scope-dependent</span></div>
+      </div>
+      <p class="card-desc">Custom Telegram bots.</p>
+      <ul>
+        <li>Sales &amp; payment bots</li>
+        <li>Automated workflows</li>
+        <li>Custom tools &amp; integrations</li>
+      </ul>
+    </article>
+
+  </div>
+
+  <p class="terms">Crypto payments only, via official Tonkeeper. Middleman accepted.</p>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-head">Start a project.</p>
+      <p class="footer-note">Direct message is the only way to contact.</p>
+    </div>
+    <a class="btn" href="https://t.me/lickxrp">Inquire on Telegram</a>
+  </div>
+</footer>
+
+</body>
+</html>
