@@ -7,19 +7,14 @@
 <title>Lick Market</title>
 <style>
   :root {
-    --bg: #f4f6f9;
+    --bg: #e8e9ed;
     --surface: #ffffff;
-    --ink: #101114;
-    --muted: #6a6d74;
-    --line: #e6e8ec;
-    --line-strong: #dcdfe4;
+    --ink: #111216;
+    --muted: #62656c;
+    --line: #e0e2e7;
+    --line-strong: #d5d8dd;
     --accent: #0098EA;
     --accent-dark: #007fc4;
-    --accent-soft: #eaf6fe;
-    --tg-a: #2aabee;
-    --tg-b: #229ed9;
-    --chat-bg: #dfe8f0;
-    --bubble: #ffffff;
     --radius: 16px;
     --font: ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   }
@@ -40,35 +35,29 @@
 
   a { color: inherit; }
 
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
-  /* Brand header */
-  header { padding: 52px 0 36px; text-align: left; }
-
+  /* Header */
+  header { padding: 54px 0 30px; }
   .wordmark {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
     font-size: 34px;
     font-weight: 800;
     letter-spacing: -0.02em;
     margin: 0;
   }
-  .mark-dot {
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: inline-block;
-  }
+  .wordmark .tg-plane { width: 30px; height: 30px; }
   .tagline {
     margin: 10px 0 0;
     color: var(--muted);
     font-size: 16px;
     font-weight: 600;
   }
-  .header-cta { margin-top: 26px; }
+  .header-cta { margin-top: 24px; }
 
-  /* Button */
+  /* Telegram button */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -83,136 +72,64 @@
     border: 1px solid var(--accent);
   }
   .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-  .btn svg { width: 18px; height: 18px; display: block; }
+  .btn .tg-plane { width: 18px; height: 18px; }
 
-  /* Chat window */
-  .chat {
-    max-width: 620px;
-    margin: 8px auto 0;
-    border: 1px solid var(--line-strong);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 10px 34px rgba(16, 17, 20, 0.09);
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 32px 0 0;
   }
 
-  .chat-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 16px;
+  /* Cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .card {
+    grid-column: span 1;
     background: var(--surface);
-    border-bottom: 1px solid var(--line);
-  }
-  .avatar {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    background: linear-gradient(180deg, var(--tg-a), var(--tg-b));
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-  }
-  .chat-id .name { font-size: 16px; font-weight: 750; line-height: 1.2; }
-  .chat-id .sub { font-size: 13px; color: var(--muted); font-weight: 500; }
-
-  .chat-body {
-    background-color: var(--chat-bg);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Ccircle cx='24' cy='24' r='1.4' fill='%23ffffff' opacity='0.45'/%3E%3Ccircle cx='0' cy='0' r='1.4' fill='%23ffffff' opacity='0.45'/%3E%3Ccircle cx='48' cy='48' r='1.4' fill='%23ffffff' opacity='0.45'/%3E%3C/svg%3E");
-    padding: 18px 14px 22px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
   }
+  .card.featured { grid-column: 1 / -1; }
 
-  /* Message bubbles */
-  .bubble {
-    align-self: flex-start;
-    max-width: 92%;
-    background: var(--bubble);
-    border-radius: 14px;
-    border-top-left-radius: 4px;
-    padding: 14px 16px;
-    box-shadow: 0 1px 1.5px rgba(16, 17, 20, 0.10);
-    position: relative;
-  }
-  .bubble::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -7px;
-    width: 11px; height: 15px;
-    background: var(--bubble);
-    clip-path: polygon(100% 0, 100% 100%, 0 0);
-  }
-
-  .bubble.featured {
-    max-width: 100%;
-    padding: 0;
-    overflow: hidden;
-    border-top-left-radius: 14px;
-  }
-  .bubble.featured::before { display: none; }
-
-  /* Logo banner (picture on top of the message) */
-  .msg-banner {
-    background: #ffffff;
-    border-bottom: 1px solid var(--line);
-    padding: 30px 20px;
+  .card-title {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-  .logo-text {
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: #101114;
-  }
-  .tg-plane { width: 40px; height: 40px; display: block; }
-
-  .msg-content { padding: 16px 18px 14px; }
-  .bubble:not(.featured) .msg-content { padding: 0; }
-
-  .bubble-title {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: 18px;
+    gap: 10px;
+    font-size: 20px;
     font-weight: 750;
     letter-spacing: -0.01em;
     margin: 0;
   }
-  .featured .bubble-title { font-size: 21px; }
-  .ico {
-    font-size: 20px;
-    line-height: 1;
-    flex: 0 0 auto;
-  }
+  .card.featured .card-title { font-size: 23px; }
+  .card-title .ico { font-size: 21px; line-height: 1; flex: 0 0 auto; }
 
-  .bubble-desc {
-    margin: 8px 0 0;
+  .card-desc {
+    margin: 12px 0 0;
     color: var(--muted);
     font-size: 15px;
     font-weight: 500;
   }
 
-  .bubble ul {
-    list-style: none;
-    margin: 14px 0 0;
-    padding: 0;
-  }
-  .featured ul { columns: 2; column-gap: 32px; }
-  .bubble li {
+  .card ul { list-style: none; margin: 16px 0 0; padding: 0; }
+  .card.featured ul { columns: 2; column-gap: 34px; }
+  .card li {
     font-size: 14.5px;
     font-weight: 500;
     padding: 6px 0 6px 22px;
     position: relative;
     break-inside: avoid;
   }
-  .bubble li::before {
+  .card li::before {
     content: "";
     position: absolute;
     left: 2px; top: 12px;
@@ -221,21 +138,16 @@
     background: var(--accent);
   }
 
-  .price-row {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin-top: 16px;
-    flex-wrap: wrap;
+  .price {
+    margin-top: 18px;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent);
   }
-  .price { font-size: 18px; font-weight: 800; color: var(--accent); }
-  .sep { color: var(--line-strong); font-weight: 700; }
-  .scope { font-size: 13px; font-weight: 600; color: var(--muted); }
+  .price .scope { color: var(--muted); font-weight: 600; font-size: 14px; }
 
   .proof {
-    margin-top: 14px;
-    padding-top: 13px;
-    border-top: 1px solid var(--line);
+    margin-top: 12px;
     font-size: 14px;
     font-weight: 600;
     color: var(--muted);
@@ -243,50 +155,59 @@
   .proof a { color: var(--accent); text-decoration: none; font-weight: 800; }
   .proof a:hover { color: var(--accent-dark); text-decoration: underline; }
 
-  .meta {
+  .card-terms {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 5px;
-    margin-top: 10px;
-    font-size: 11px;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .card-terms p {
+    margin: 0;
+    font-size: 14px;
     font-weight: 600;
     color: var(--muted);
   }
-  .featured .meta { padding: 0 18px 14px; margin-top: 4px; }
-
-  .bubble.terms {
-    background: var(--accent-soft);
-    font-size: 14.5px;
-    font-weight: 650;
-    color: #0b5f8f;
+  .card-terms a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 800;
   }
-  .bubble.terms::before { background: var(--accent-soft); }
+  .card-terms a:hover { color: var(--accent-dark); text-decoration: underline; }
 
   /* Footer */
-  footer { padding: 44px 0 64px; }
-  .footer-card {
-    border: 1px solid var(--line-strong);
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 22px;
-    flex-wrap: wrap;
+  footer {
+    margin-top: 44px;
+    border-top: 1px solid var(--line-strong);
+    padding: 40px 0 60px;
+    text-align: center;
   }
-  .footer-head { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; margin: 0; }
-  .footer-note { margin: 6px 0 0; color: var(--muted); font-size: 15px; font-weight: 500; }
+  .footer-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .footer-handle:hover { color: var(--accent-dark); text-decoration: underline; }
+  .footer-handle .tg-plane { width: 20px; height: 20px; }
+  .footer-line {
+    margin: 14px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .footer-line.sub { color: var(--muted); font-weight: 500; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .footer-cta { margin-top: 24px; }
 
   @media (max-width: 720px) {
-    header { padding: 38px 0 28px; }
+    header { padding: 38px 0 24px; }
     .wordmark { font-size: 29px; }
-    .chat { border-radius: 14px; }
-    .featured ul { columns: 1; }
-    .logo-text { font-size: 28px; }
-    .tg-plane { width: 34px; height: 34px; }
-    .footer-card { padding: 24px; }
+    .grid { grid-template-columns: 1fr; }
+    .card.featured ul { columns: 1; }
   }
 </style>
 </head>
@@ -294,11 +215,18 @@
 
 <header>
   <div class="wrap">
-    <h1 class="wordmark"><span class="mark-dot"></span>Lick Market</h1>
+    <h1 class="wordmark">
+      Lick Market
+      <svg class="tg-plane" viewBox="0 0 240 240" aria-hidden="true">
+        <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2aabee"/><stop offset="1" stop-color="#229ed9"/></linearGradient></defs>
+        <circle cx="120" cy="120" r="120" fill="url(#tg)"/>
+        <path fill="#fff" d="M53.6,113.4 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5z"/>
+      </svg>
+    </h1>
     <p class="tagline">Every build is one of one.</p>
     <div class="header-cta">
       <a class="btn" href="https://t.me/lickxrp">
-        <svg viewBox="0 0 240 240" aria-hidden="true"><path fill="#fff" d="M53.6,113.4 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5z"/></svg>
+        <svg class="tg-plane" viewBox="0 0 240 240" aria-hidden="true"><path fill="#fff" d="M53.6,113.4 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5z"/></svg>
         Inquire on Telegram
       </a>
     </div>
@@ -306,139 +234,132 @@
 </header>
 
 <main class="wrap">
-  <div class="chat">
+  <p class="section-label">Services</p>
 
-    <div class="chat-header">
-      <span class="avatar">L</span>
-      <div class="chat-id">
-        <div class="name">Lick Market</div>
-        <div class="sub">custom development</div>
+  <div class="grid">
+
+    <article class="card featured">
+      <h2 class="card-title"><span class="ico">🖥️</span> On-chain Intelligence Terminal</h2>
+      <p class="card-desc">A private intelligence terminal for monitoring and investigating on-chain activity.</p>
+      <ul>
+        <li>Wallet &amp; entity tracking</li>
+        <li>Transaction flow analysis</li>
+        <li>Token &amp; contract intelligence</li>
+        <li>Address labels &amp; watchlists</li>
+        <li>Real-time alerts</li>
+        <li>Historical activity</li>
+        <li>Custom dashboards</li>
+        <li>API &amp; data exports</li>
+      </ul>
+      <p class="price">$5,000+ <span class="scope">/ scope-dependent</span></p>
+      <p class="proof">Live build: <a href="https://xcfund.app" target="_blank" rel="noopener noreferrer">xcfund.app</a></p>
+      <div class="card-terms">
+        <p>📲 DM <a href="https://t.me/lickxrp">@lickxrp</a></p>
+        <p>🤝 Middleman accepted</p>
+        <p>💎 Crypto payments only via official Tonkeeper.</p>
       </div>
-    </div>
+    </article>
 
-    <div class="chat-body">
+    <article class="card">
+      <h2 class="card-title"><span class="ico">🛒</span> Telegram Commerce Platform</h2>
+      <p class="card-desc">Build your business directly inside Telegram.</p>
+      <ul>
+        <li>Mini App storefront</li>
+        <li>Payments &amp; subscriptions</li>
+        <li>Automated delivery</li>
+        <li>Affiliate &amp; referral system</li>
+        <li>Customer management</li>
+      </ul>
+      <p class="price">$2,000+ <span class="scope">/ scope-dependent</span></p>
+      <div class="card-terms">
+        <p>📲 DM <a href="https://t.me/lickxrp">@lickxrp</a></p>
+        <p>🤝 Middleman accepted</p>
+        <p>💎 Crypto payments only via official Tonkeeper.</p>
+      </div>
+    </article>
 
-      <!-- Flagship message: logo banner on top, like the Telegram post -->
-      <article class="bubble featured">
-        <div class="msg-banner">
-          <span class="logo-text">lickxrp</span>
-          <svg class="tg-plane" viewBox="0 0 240 240" aria-hidden="true">
-            <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2aabee"/><stop offset="1" stop-color="#229ed9"/></linearGradient></defs>
-            <circle cx="120" cy="120" r="120" fill="url(#tg)"/>
-            <path fill="#fff" d="M53.6,113.4 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5z"/>
-          </svg>
-        </div>
-        <div class="msg-content">
-          <h2 class="bubble-title"><span class="ico">🖥️</span> On-chain Intelligence Terminal</h2>
-          <p class="bubble-desc">A private intelligence terminal for monitoring and investigating on-chain activity.</p>
-          <ul>
-            <li>Wallet &amp; entity tracking</li>
-            <li>Transaction flow analysis</li>
-            <li>Token &amp; contract intelligence</li>
-            <li>Address labels &amp; watchlists</li>
-            <li>Real-time alerts</li>
-            <li>Historical activity</li>
-            <li>Custom dashboards</li>
-            <li>API &amp; data exports</li>
-          </ul>
-          <div class="price-row"><span class="price">$5,000+</span><span class="sep">·</span><span class="scope">scope-dependent</span></div>
-          <p class="proof">Live build: <a href="https://xcfund.app" target="_blank" rel="noopener noreferrer">xcfund.app</a></p>
-        </div>
-        <div class="meta">6:21 PM</div>
-      </article>
+    <article class="card">
+      <h2 class="card-title"><span class="ico">💳</span> Custom TON Payment Systems</h2>
+      <p class="card-desc">Custom crypto payment infrastructure for your business.</p>
+      <ul>
+        <li>TON &amp; USDT payments</li>
+        <li>Automatic payment verification</li>
+        <li>Transaction tracking &amp; delivery</li>
+      </ul>
+      <p class="price">$1,500+ <span class="scope">/ scope-dependent</span></p>
+      <div class="card-terms">
+        <p>📲 DM <a href="https://t.me/lickxrp">@lickxrp</a></p>
+        <p>🤝 Middleman accepted</p>
+        <p>💎 Crypto payments only via official Tonkeeper.</p>
+      </div>
+    </article>
 
-      <article class="bubble">
-        <div class="msg-content">
-          <h2 class="bubble-title"><span class="ico">🛒</span> Telegram Commerce Platform</h2>
-          <p class="bubble-desc">Build your business directly inside Telegram.</p>
-          <ul>
-            <li>Mini App storefront</li>
-            <li>Payments &amp; subscriptions</li>
-            <li>Automated delivery</li>
-            <li>Affiliate &amp; referral system</li>
-            <li>Customer management</li>
-          </ul>
-          <div class="price-row"><span class="price">$2,000+</span><span class="sep">·</span><span class="scope">scope-dependent</span></div>
-        </div>
-        <div class="meta">6:21 PM</div>
-      </article>
+    <article class="card">
+      <h2 class="card-title"><span class="ico">💻</span> Building web apps</h2>
+      <p class="card-desc">A service to build ANY web application, regardless of ethicality.</p>
+      <ul>
+        <li>Dashboards &amp; user systems</li>
+        <li>Automation &amp; custom tools</li>
+        <li>Payments &amp; third-party services</li>
+      </ul>
+      <p class="price">$1,000+ <span class="scope">/ scope-dependent</span></p>
+      <div class="card-terms">
+        <p>📲 DM <a href="https://t.me/lickxrp">@lickxrp</a></p>
+        <p>🤝 Middleman accepted</p>
+        <p>💎 Crypto payments only via official Tonkeeper.</p>
+      </div>
+    </article>
 
-      <article class="bubble">
-        <div class="msg-content">
-          <h2 class="bubble-title"><span class="ico">💎</span> Custom TON Payment Systems</h2>
-          <p class="bubble-desc">Custom crypto payment infrastructure for your business.</p>
-          <ul>
-            <li>TON &amp; USDT payments</li>
-            <li>Automatic payment verification</li>
-            <li>Transaction tracking &amp; delivery</li>
-          </ul>
-          <div class="price-row"><span class="price">$1,500+</span><span class="sep">·</span><span class="scope">scope-dependent</span></div>
-        </div>
-        <div class="meta">6:22 PM</div>
-      </article>
+    <article class="card">
+      <h2 class="card-title"><span class="ico">📱</span> Telegram Mini Apps</h2>
+      <p class="card-desc">Custom Mini Apps built directly inside Telegram.</p>
+      <ul>
+        <li>Stores &amp; marketplaces</li>
+        <li>Payments &amp; subscriptions</li>
+        <li>User accounts &amp; dashboards</li>
+        <li>Custom integrations</li>
+      </ul>
+      <p class="price">$1,000+ <span class="scope">/ scope-dependent</span></p>
+      <div class="card-terms">
+        <p>📲 DM <a href="https://t.me/lickxrp">@lickxrp</a></p>
+        <p>🤝 Middleman accepted</p>
+        <p>💎 Crypto payments only via official Tonkeeper.</p>
+      </div>
+    </article>
 
-      <article class="bubble">
-        <div class="msg-content">
-          <h2 class="bubble-title"><span class="ico">🌐</span> Web Apps</h2>
-          <p class="bubble-desc">Build any web application.</p>
-          <ul>
-            <li>Dashboards &amp; user systems</li>
-            <li>Automation &amp; custom tools</li>
-            <li>Payments &amp; third-party services</li>
-          </ul>
-          <div class="price-row"><span class="price">$1,000+</span><span class="sep">·</span><span class="scope">scope-dependent</span></div>
-        </div>
-        <div class="meta">6:22 PM</div>
-      </article>
+    <article class="card">
+      <h2 class="card-title"><span class="ico">🤖</span> Custom Telegram Bots</h2>
+      <p class="card-desc">Custom Telegram bots.</p>
+      <ul>
+        <li>Sales &amp; payment bots</li>
+        <li>Automated workflows</li>
+        <li>Custom tools &amp; integrations</li>
+      </ul>
+      <p class="price">$500+ <span class="scope">/ scope-dependent</span></p>
+      <div class="card-terms">
+        <p>📲 DM <a href="https://t.me/lickxrp">@lickxrp</a></p>
+        <p>🤝 Middleman accepted</p>
+        <p>💎 Crypto payments only via official Tonkeeper.</p>
+      </div>
+    </article>
 
-      <article class="bubble">
-        <div class="msg-content">
-          <h2 class="bubble-title"><span class="ico">📱</span> Telegram Mini Apps</h2>
-          <p class="bubble-desc">Custom Mini Apps built directly inside Telegram.</p>
-          <ul>
-            <li>Stores &amp; marketplaces</li>
-            <li>Payments &amp; subscriptions</li>
-            <li>User accounts &amp; dashboards</li>
-            <li>Custom integrations</li>
-          </ul>
-          <div class="price-row"><span class="price">$1,000+</span><span class="sep">·</span><span class="scope">scope-dependent</span></div>
-        </div>
-        <div class="meta">6:23 PM</div>
-      </article>
-
-      <article class="bubble">
-        <div class="msg-content">
-          <h2 class="bubble-title"><span class="ico">🤖</span> Custom Telegram Bots</h2>
-          <p class="bubble-desc">Custom Telegram bots.</p>
-          <ul>
-            <li>Sales &amp; payment bots</li>
-            <li>Automated workflows</li>
-            <li>Custom tools &amp; integrations</li>
-          </ul>
-          <div class="price-row"><span class="price">$500+</span><span class="sep">·</span><span class="scope">scope-dependent</span></div>
-        </div>
-        <div class="meta">6:23 PM</div>
-      </article>
-
-      <article class="bubble terms">
-        <div class="msg-content">Crypto payments only, via official Tonkeeper. Middleman accepted.</div>
-        <div class="meta">6:24 PM</div>
-      </article>
-
-    </div>
   </div>
 </main>
 
-<footer class="wrap">
-  <div class="footer-card">
-    <div>
-      <p class="footer-head">Start a project.</p>
-      <p class="footer-note">Direct message is the only way to contact.</p>
-    </div>
-    <a class="btn" href="https://t.me/lickxrp">
-      <svg viewBox="0 0 240 240" aria-hidden="true"><path fill="#fff" d="M53.6,113.4 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5z"/></svg>
-      Inquire on Telegram
+<footer>
+  <div class="wrap">
+    <a class="footer-handle" href="https://t.me/lickxrp">
+      <svg class="tg-plane" viewBox="0 0 240 240" aria-hidden="true"><path fill="#0098EA" d="M120,0 A120,120 0 1,0 120,240 A120,120 0 1,0 120,0z M175.6,74 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5z"/></svg>
+      @lickxrp
     </a>
+    <p class="footer-line">Every build is one of one.</p>
+    <p class="footer-line sub">I build regardless of the ethicality of the project, no questions asked.</p>
+    <div class="footer-cta">
+      <a class="btn" href="https://t.me/lickxrp">
+        <svg class="tg-plane" viewBox="0 0 240 240" aria-hidden="true"><path fill="#fff" d="M53.6,113.4 l116.5,-44.9 c5.4,-1.9 10.1,1.3 8.4,9.5 l-19.8,93.4 c-1.4,6.6 -5.3,8.2 -10.8,5.1 l-30,-22.1 -14.5,13.9 c-1.6,1.6 -2.9,2.9 -6,2.9 l2.1,-30.3 55.3,-49.9 c2.4,-2.1 -0.5,-3.3 -3.7,-1.2 l-68.3,43 -29.4,-9.2 c-6.4,-2 -6.5,-6.4 1.4,-9.5z"/></svg>
+        Inquire on Telegram
+      </a>
+    </div>
   </div>
 </footer>
 
