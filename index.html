@@ -7,15 +7,17 @@
 <title>Lick Market</title>
 <style>
   :root {
-    --bg: #fbfbfb;
+    --bg: #f7f8fa;
     --surface: #ffffff;
-    --ink: #0e0e10;
-    --muted: #55575c;
-    --line: #e6e6e8;
-    --line-strong: #d8d8dc;
+    --ink: #101114;
+    --muted: #5a5d64;
+    --line: #e8e9ec;
+    --line-strong: #dfe1e6;
     --accent: #0098EA;
-    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --accent-dark: #007fc4;
+    --accent-soft: #eaf6fe;
+    --radius: 16px;
+    --font: ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   }
 
   * { box-sizing: border-box; }
@@ -26,10 +28,11 @@
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--sans);
+    font-family: var(--font);
     font-size: 16px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
   }
 
   a { color: inherit; }
@@ -37,37 +40,50 @@
   .wrap {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 20px;
   }
 
   /* Header */
   header {
-    border-bottom: 1px solid var(--line);
     padding: 56px 0 40px;
   }
 
   .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     font-size: 34px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
     margin: 0;
   }
 
+  .mark-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+
   .tagline {
-    margin: 8px 0 0;
+    margin: 10px 0 0;
     color: var(--muted);
     font-size: 16px;
+    font-weight: 500;
   }
 
   .positioning {
-    margin: 24px 0 0;
-    padding: 16px 18px;
-    border: 1px solid var(--line-strong);
-    border-left: 3px solid var(--accent);
+    margin: 26px 0 0;
+    padding: 18px 20px;
+    border-radius: var(--radius);
     background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-left: 4px solid var(--accent);
     font-size: 15px;
-    line-height: 1.5;
-    max-width: 720px;
+    line-height: 1.55;
+    font-weight: 500;
+    max-width: 740px;
   }
 
   .header-cta {
@@ -76,58 +92,43 @@
 
   /* Button */
   .btn {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 13px;
-    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 700;
     text-decoration: none;
-    padding: 12px 20px;
+    padding: 13px 22px;
+    border-radius: 999px;
     background: var(--accent);
     color: #ffffff;
     border: 1px solid var(--accent);
   }
 
-  .btn:hover { background: #007fc4; border-color: #007fc4; }
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  .btn-ghost:hover { background: transparent; color: #007fc4; }
-
-  /* Section labels */
+  /* Section label */
   .section-label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--muted);
-    margin: 44px 0 18px;
-  }
-
-  /* Terms strip */
-  .terms {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--muted);
-    border: 1px solid var(--line);
-    background: var(--surface);
-    padding: 12px 16px;
-    margin: 40px 0 8px;
+    margin: 46px 0 4px;
   }
 
   /* Cards */
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 18px;
     margin-top: 20px;
   }
 
   .card {
     border: 1px solid var(--line-strong);
     background: var(--surface);
+    border-radius: var(--radius);
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -135,8 +136,22 @@
 
   .card.featured {
     grid-column: 1 / -1;
-    border-top: 3px solid var(--accent);
     padding: 32px;
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 1px 0 var(--accent) inset, 0 6px 24px rgba(16, 17, 20, 0.05);
+    border-top: 3px solid var(--accent);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
   }
 
   .card-head {
@@ -148,35 +163,35 @@
   }
 
   .card-title {
-    font-size: 19px;
-    font-weight: 650;
+    font-size: 20px;
+    font-weight: 750;
     letter-spacing: -0.01em;
     margin: 0;
   }
 
-  .card.featured .card-title { font-size: 24px; }
+  .card.featured .card-title { font-size: 26px; }
 
   .price {
-    font-family: var(--mono);
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 750;
     color: var(--accent);
     white-space: nowrap;
+    text-align: right;
   }
 
   .price .scope {
     display: block;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--muted);
-    text-align: right;
     margin-top: 2px;
-    letter-spacing: 0.02em;
   }
 
   .card-desc {
     margin: 12px 0 0;
     color: var(--muted);
     font-size: 15px;
+    font-weight: 500;
   }
 
   .card ul {
@@ -187,12 +202,13 @@
 
   .card.featured ul {
     columns: 2;
-    column-gap: 32px;
+    column-gap: 36px;
   }
 
   .card li {
-    font-size: 14px;
-    padding: 6px 0 6px 18px;
+    font-size: 14.5px;
+    font-weight: 500;
+    padding: 7px 0 7px 24px;
     position: relative;
     break-inside: avoid;
   }
@@ -200,21 +216,69 @@
   .card li::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: 12px;
-    width: 6px;
-    height: 6px;
+    left: 2px;
+    top: 13px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
     background: var(--accent);
+  }
+
+  .proof {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+
+  .proof .proof-label {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .proof a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 750;
+  }
+
+  .proof a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+  /* Terms strip */
+  .terms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--muted);
+    border: 1px solid var(--line-strong);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin: 22px 0 8px;
+  }
+
+  .terms .terms-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: 0 0 auto;
   }
 
   /* Footer */
   footer {
-    border-top: 1px solid var(--line);
-    margin-top: 64px;
-    padding: 44px 0 64px;
+    margin-top: 56px;
+    padding: 40px 0 64px;
   }
 
-  .footer-inner {
+  .footer-card {
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -223,8 +287,8 @@
   }
 
   .footer-head {
-    font-size: 20px;
-    font-weight: 650;
+    font-size: 22px;
+    font-weight: 800;
     letter-spacing: -0.01em;
     margin: 0;
   }
@@ -232,16 +296,18 @@
   .footer-note {
     margin: 6px 0 0;
     color: var(--muted);
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
   }
 
   @media (max-width: 720px) {
     header { padding: 40px 0 32px; }
-    .wordmark { font-size: 28px; }
+    .wordmark { font-size: 29px; }
     .grid { grid-template-columns: 1fr; }
     .card.featured { padding: 24px; }
-    .card.featured .card-title { font-size: 21px; }
+    .card.featured .card-title { font-size: 22px; }
     .card.featured ul { columns: 1; }
+    .footer-card { padding: 24px; }
   }
 </style>
 </head>
@@ -249,7 +315,7 @@
 
 <header>
   <div class="wrap">
-    <h1 class="wordmark">Lick Market</h1>
+    <h1 class="wordmark"><span class="mark-dot"></span>Lick Market</h1>
     <p class="tagline">Custom development, built to order.</p>
     <p class="positioning">We take on work regardless of ethics. One hard line: no malware, no wallet drainers, no scams.</p>
     <div class="header-cta">
@@ -264,6 +330,7 @@
   <div class="grid">
 
     <article class="card featured">
+      <div class="card-icon">🖥️</div>
       <div class="card-head">
         <h2 class="card-title">On-chain Intelligence Terminal</h2>
         <div class="price">$5,000+<span class="scope">scope-dependent</span></div>
@@ -279,9 +346,11 @@
         <li>Custom dashboards</li>
         <li>API &amp; data exports</li>
       </ul>
+      <p class="proof"><span class="proof-label">Live build:</span> <a href="https://xcfund.app" target="_blank" rel="noopener noreferrer">xcfund.app</a></p>
     </article>
 
     <article class="card">
+      <div class="card-icon">🛒</div>
       <div class="card-head">
         <h2 class="card-title">Telegram Commerce Platform</h2>
         <div class="price">$2,000+<span class="scope">scope-dependent</span></div>
@@ -297,6 +366,7 @@
     </article>
 
     <article class="card">
+      <div class="card-icon">💎</div>
       <div class="card-head">
         <h2 class="card-title">Custom TON Payment Systems</h2>
         <div class="price">$1,500+<span class="scope">scope-dependent</span></div>
@@ -310,6 +380,7 @@
     </article>
 
     <article class="card">
+      <div class="card-icon">🌐</div>
       <div class="card-head">
         <h2 class="card-title">Web Apps</h2>
         <div class="price">$1,000+<span class="scope">scope-dependent</span></div>
@@ -323,6 +394,7 @@
     </article>
 
     <article class="card">
+      <div class="card-icon">📱</div>
       <div class="card-head">
         <h2 class="card-title">Telegram Mini Apps</h2>
         <div class="price">$1,000+<span class="scope">scope-dependent</span></div>
@@ -337,6 +409,7 @@
     </article>
 
     <article class="card">
+      <div class="card-icon">🤖</div>
       <div class="card-head">
         <h2 class="card-title">Custom Telegram Bots</h2>
         <div class="price">$500+<span class="scope">scope-dependent</span></div>
@@ -351,11 +424,11 @@
 
   </div>
 
-  <p class="terms">Crypto payments only, via official Tonkeeper. Middleman accepted.</p>
+  <p class="terms"><span class="terms-dot"></span>Crypto payments only, via official Tonkeeper. Middleman accepted.</p>
 </main>
 
-<footer>
-  <div class="wrap footer-inner">
+<footer class="wrap">
+  <div class="footer-card">
     <div>
       <p class="footer-head">Start a project.</p>
       <p class="footer-note">Direct message is the only way to contact.</p>
